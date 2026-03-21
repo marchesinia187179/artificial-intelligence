@@ -49,8 +49,8 @@ class Naive_Bayes:
 
     def _likelihood(self, x_test, idx):
         mean = self._means[idx]
-        var = self._vars[idx]
-        numerator = np.exp((-0.5 * (x_test - mean)**2) / (2 * var))
+        var = self._vars[idx] + 1e-9
+        numerator = np.exp((-(x_test - mean)**2) / (2 * var))
         denominator = np.sqrt(2 * np.pi * var)
 
         return numerator / denominator
@@ -70,7 +70,7 @@ def plot_data(X, Y, x_col, y_col):
 
 
 def main():
-    data = pd.read_csv("orange-or-grapefruit/data.csv")
+    data = pd.read_csv("naive-bayes/orange-or-grapefruit/data.csv")
     X = data.drop(columns=["name"])
     Y = data["name"]
 
