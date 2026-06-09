@@ -16,7 +16,6 @@ class Logistic_Regression:
 
     def __init__(self):
         self._weights = None
-        pass
 
     def fit(self, X_train, y_train, training_steps, learning_rate):
         n_samples, n_features = X_train.shape
