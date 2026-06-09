@@ -1,4 +1,4 @@
-from sklearn.datasets import load_iris
+from sklearn.datasets import load_iris, load_wine
 from sklearn.model_selection import train_test_split
 import numpy as np
 
@@ -35,13 +35,14 @@ class NaiveBayes():
 
 
     def _log_likelihood(self, X):
-        # Aggiungiamo un piccolo epsilon alla varianza per stabilità numerica
-        var = self._var + 1e-9
+        # Smoothing della varianza per evitare divisioni per zero o instabilità
+        var = self._var + (1e-9 * np.max(self._var))
         return - 0.5 * np.sum(np.log(2 * np.pi * var) + (X[:, np.newaxis, :] - self._mean) ** 2 / var, axis=2)
 
-
+                
 def main():
-    dataset = load_iris()
+    #dataset = load_iris()
+    dataset = load_wine()
     X_train, X_test, y_train, y_test = train_test_split(dataset.data, dataset.target, test_size=0.2, random_state=42)
     model = NaiveBayes()
     model.fit(X_train, y_train)
