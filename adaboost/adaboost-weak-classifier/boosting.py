@@ -108,7 +108,7 @@ class AdaBoostClassifier:
             cur_X = X[cur_idx]
             cur_Y = Y[cur_idx]
 
-              # search for a weak classifier
+            # search for a weak classifier
             error = 1
             n_trials = 0
             cur_wclass = None
